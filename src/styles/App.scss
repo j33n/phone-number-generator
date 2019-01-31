@@ -6,7 +6,48 @@
 .header {
   display: flex;
   flex-direction: row;
-  .logo {
-    width: 20px
+  width: 100%;
+  background: #f5f5f5;
+
+  .logo-container {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      top: 38px;
+    }
   }
+
+  .menu {
+    width: 40%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      color: #1e8686;
+      font-family: 'Thasadith Regular';
+      font-size: 20px;
+      padding: 10px;
+      &:hover {
+        color: #186969;
+        cursor: pointer;
+      }
+    }
+    a {
+      text-decoration: none;
+      &:visited {
+        color: #1e8686;
+      }
+      &:hover {
+        color: #186969;
+      }
+    }
+  }
+
 }
