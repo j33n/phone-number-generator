@@ -1,0 +1,23 @@
+{
+    "extends": ["airbnb", "plugin:react/recommended"],
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "jest": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+          "experimentalObjectRestSpread": true
+        }
+      },
+    "rules": {
+        "react/jsx-filename-extension": [1, {
+            "extensions": [".js", ".jsx"]
+        }],
+        "react/prefer-stateless-function": 0,
+        "comma-dangle": 0,
+        "no-tabs": 0
+    }
+}
