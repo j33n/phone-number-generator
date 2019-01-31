@@ -1,0 +1,41 @@
+.generator-button {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 70px auto;
+    border-radius: 25px;
+    background: #249292;
+    color: #fff;
+
+    width: 40%;
+
+    &:hover {
+        background: #007172;
+        cursor: pointer;
+    }
+}
+
+.loader {
+    height: 20px;
+    background: red;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.alert {
+    font-size: 12px;
+    color: #fff;
+
+    &--success {
+        color: #4bb543;
+    }
+
+    &--danger {
+        color: #bb2124
+    }
+
+    &--warning {
+        color: #ffcc00;
+    }
+}
