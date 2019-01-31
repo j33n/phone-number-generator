@@ -6,4 +6,7 @@
 .header {
   display: flex;
   flex-direction: row;
+  .logo {
+    width: 20px
+  }
 }

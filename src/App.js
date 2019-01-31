@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import logo from './assets/phone-generator-logo.png';
-import './styles/App.css';
+import './styles/App.scss';
 
 class App extends PureComponent {
   render() {
