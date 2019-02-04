@@ -1,0 +1,60 @@
+.number-display {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+
+    &--header {
+        border: 1px solid rgb(210, 210, 210);
+        text-align: center;
+        margin-top: 10px;
+
+        h2 {
+            margin: 5px auto;
+        }
+    }
+
+    &--number {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+
+        &__0 {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .index-column {
+            width: 15%;
+            padding: 5px 0;
+            border: solid rgb(210, 210, 210);
+            border-width: 0px 1px 0px 1px;
+        }
+
+        .number-column {
+            width: 85%;
+            padding: 5px 0;
+            border: solid rgb(210, 210, 210);
+            border-width: 0px 1px 0 0;
+        }
+    }
+
+    .sub-heading {
+        display: flex;
+        width: 100%;
+        text-align: center;
+
+        .index-header {
+            width: 15%;
+            padding: 5px 0;
+            border: solid rgb(210, 210, 210);
+            border-width: 0px 1px 0px 1px;
+        }
+
+        .number-header {
+            width: 85%;
+            padding: 5px 0;
+            border: solid rgb(210, 210, 210);
+            border-width: 0px 1px 0 0;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.scroll {
+    position: fixed;
+    background-image: linear-gradient(to right, #009493, #418280, #008281);
+    top: 10%;
+    right: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    height: 32px;
+
+    &:hover {
+        cursor: pointer;
+        background-image: linear-gradient(to right, #009493, #0d9692, #008281);
+    }
+
+    .scroll-up {
+        transform: rotate(180deg);
+    }
+}
