@@ -8,12 +8,12 @@ import './ScrollEnd.scss';
 class ScrollEnd extends PureComponent {
     static propTypes = {
       size: PropTypes.number,
-      scrollY: PropTypes.number,
+      height: PropTypes.number,
     }
 
     static defaultProps = {
       size: 32,
-      scrollY: 0,
+      height: 0,
     }
 
     state = {
@@ -28,14 +28,14 @@ class ScrollEnd extends PureComponent {
 
     componentDidUpdate = (prevProps, prevState) => {
       const { scrollY } = this.state;
-      if (prevState.scrollY !== scrollY && scrollY > prevState.scrollY) {
+      if (prevState.scrollY !== scrollY && scrollY > prevState.scrollY && scrollY !== 0) {
         this.setState({
           topBottomScroll: true,
           bottomTopScroll: false
         });
       }
 
-      if (prevState.scrollY !== scrollY && prevState.scrollY > scrollY && scrollY !== 0) {
+      if (prevState.scrollY !== scrollY && scrollY < prevState.scrollY && scrollY !== 0) {
         this.setState({
           topBottomScroll: false,
           bottomTopScroll: true
@@ -50,7 +50,14 @@ class ScrollEnd extends PureComponent {
 
     scrollToEnd = () => {
       const { bottomTopScroll, topBottomScroll } = this.state;
-      if (bottomTopScroll) {
+      const { height } = this.props;
+      console.log('height', height);
+
+      if (topBottomScroll) {
+        window.scrollTo(0, height);
+      } else if (bottomTopScroll) {
+        window.scrollTo(0, 0);
+      } else {
         window.scrollTo(0, 0);
       }
     }
@@ -74,9 +81,12 @@ class ScrollEnd extends PureComponent {
         width: size,
       };
       return (
-        <div className="scroll" onClick={this.scrollToEnd} role="presentation">
-          <img src={arrow} alt="arrow" style={imageStyle} className={`arrow-button ${bottomTopScroll && 'scroll-up'} ${topBottomScroll && 'scroll-down'}`} />
-        </div>
+        (bottomTopScroll || topBottomScroll)
+            && (
+            <div className="scroll" onClick={this.scrollToEnd} role="presentation">
+              <img src={arrow} alt="arrow" style={imageStyle} className={`arrow-button ${bottomTopScroll && 'scroll-up'} ${topBottomScroll && 'scroll-down'}`} />
+            </div>
+            )
       );
     }
 }

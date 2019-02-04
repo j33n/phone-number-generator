@@ -1,12 +1,12 @@
 import { Link, Router } from '@reach/router';
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import logo from './assets/phone-generator-logo.png';
 import GenerateNumbers from './pages/GenerateNumbers/GenerateNumbers';
 import ViewNumbers from './pages/ViewNumbers/ViewNumbers';
 import './styles/App.scss';
 
-class App extends PureComponent {
+class App extends Component {
   render() {
     return (
       <div className="app-container">
@@ -26,6 +26,13 @@ class App extends PureComponent {
             <GenerateNumbers path="/" />
             <ViewNumbers path="view" />
           </Router>
+        </div>
+        <div className="footer">
+          <span>
+            Handcrafted by
+            {' '}
+            <a href="https://github.com/j33nn"> Jean Abayo</a>
+          </span>
         </div>
       </div>
     );

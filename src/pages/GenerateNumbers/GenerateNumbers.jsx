@@ -1,13 +1,30 @@
 import React, { PureComponent } from 'react';
 
+import withWindowDimensions from '../../components/WindowDimensions/withWindowDimensions';
 import NumberTable from '../../components/NumberTable/NumberTable';
 
 import './generate.scss';
 import ScrollEnd from '../../components/ScrollEnd/ScrollEnd';
 
 class GenerateNumbers extends PureComponent {
-  state = {
-    numbersGenerated: 0,
+  constructor(props) {
+    super(props);
+    this.dimensionRef = React.createRef();
+    this.state = {
+      numbersGenerated: 0,
+      height: null,
+    };
+  }
+
+  componentDidMount = () => {
+    this.setState({ height: this.dimensionRef.current && this.dimensionRef.current.clientHeight });
+  }
+
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.dimensionRef.current && this.dimensionRef.current.clientHeight && prevState.height) {
+      this.setState({ height: this.dimensionRef.current && this.dimensionRef.current.clientHeight });
+    }
   }
 
   formZeroedNumber = (number, numberOfZeroes) => {
@@ -46,10 +63,10 @@ class GenerateNumbers extends PureComponent {
   };
 
   render() {
-    const { numbersGenerated, allNumbers } = this.state;
+    const { numbersGenerated, allNumbers, height } = this.state;
     return (
-      <div className="container">
-        <ScrollEnd size={32} />
+      <div className="container" ref={this.dimensionRef}>
+        <ScrollEnd size={32} height={height} />
         <div className="generator-button" onClick={this.triggerGenerator} type="button" role="presentation">Generate Random Phone Numbers</div>
         {!!numbersGenerated && (
           <div className="alert-container">
@@ -66,4 +83,4 @@ class GenerateNumbers extends PureComponent {
   }
 }
 
-export default GenerateNumbers;
+export default withWindowDimensions(GenerateNumbers);
