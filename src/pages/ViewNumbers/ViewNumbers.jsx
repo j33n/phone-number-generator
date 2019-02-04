@@ -1,9 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const ViewNumbers = () => (
-  <div>
-    <h2>View Numbers</h2>
-  </div>
-);
+import NumberTable from '../../components/NumberTable/NumberTable';
+import ScrollEnd from '../../components/ScrollEnd/ScrollEnd';
+
+import './ViewNumbers.scss';
+
+class ViewNumbers extends Component {
+  constructor(props) {
+    super(props);
+    this.viewRef = React.createRef();
+    this.state = {
+      storedNumbers: [],
+      height: null,
+    };
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.viewRef.current && this.viewRef.current.clientHeight
+      && prevState.height !== this.viewRef.current.clientHeight) {
+      this.setState({
+        height: this.viewRef.current && this.viewRef.current.clientHeight
+      });
+    }
+  }
+
+  componentDidMount = () => {
+    const storedNumbers = localStorage.getItem('numbers').split(',');
+    this.setState({
+      height: this.viewRef.current && this.viewRef.current.clientHeight,
+      storedNumbers,
+    });
+  }
+
+  render() {
+    const { storedNumbers, height } = this.state;
+    if (!storedNumbers || storedNumbers.length === 0) {
+      return (
+        <div className="error">
+          <h3>
+            Oops no numbers generated yet
+            {' '}
+            <span role="img" aria-label="oops">🤭</span>
+          </h3>
+        </div>
+      );
+    }
+    return (
+      <div className="container" ref={this.viewRef}>
+        <ScrollEnd size={32} height={height} />
+        <NumberTable numbers={storedNumbers} />
+      </div>
+    );
+  }
+}
 
 export default ViewNumbers;

@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 
-import withWindowDimensions from '../../components/WindowDimensions/withWindowDimensions';
 import NumberTable from '../../components/NumberTable/NumberTable';
+import ScrollEnd from '../../components/ScrollEnd/ScrollEnd';
 
 import './generate.scss';
-import ScrollEnd from '../../components/ScrollEnd/ScrollEnd';
 
 class GenerateNumbers extends PureComponent {
   constructor(props) {
@@ -20,10 +19,12 @@ class GenerateNumbers extends PureComponent {
     this.setState({ height: this.dimensionRef.current && this.dimensionRef.current.clientHeight });
   }
 
-
   componentDidUpdate = (prevProps, prevState) => {
-    if (this.dimensionRef.current && this.dimensionRef.current.clientHeight && prevState.height) {
-      this.setState({ height: this.dimensionRef.current && this.dimensionRef.current.clientHeight });
+    if (this.dimensionRef.current && this.dimensionRef.current.clientHeight
+      && prevState.height !== this.viewRef.current.clientHeight) {
+      this.setState({
+        height: this.dimensionRef.current && this.dimensionRef.current.clientHeight
+      });
     }
   }
 
@@ -83,4 +84,4 @@ class GenerateNumbers extends PureComponent {
   }
 }
 
-export default withWindowDimensions(GenerateNumbers);
+export default GenerateNumbers;

@@ -51,7 +51,6 @@ class ScrollEnd extends PureComponent {
     scrollToEnd = () => {
       const { bottomTopScroll, topBottomScroll } = this.state;
       const { height } = this.props;
-      console.log('height', height);
 
       if (topBottomScroll) {
         window.scrollTo(0, height);
