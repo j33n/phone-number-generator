@@ -46,9 +46,10 @@ class ViewNumbers extends Component {
       );
     }
     return (
-      <div className="container" ref={this.viewRef}>
+      <div className="view-container" ref={this.viewRef}>
+        <div className="numbers-text">{`We have generated ${storedNumbers.length} numbers in total`}</div>
         <ScrollEnd size={32} height={height} />
-        <NumberTable numbers={storedNumbers} />
+        <NumberTable numbers={storedNumbers} sortable />
       </div>
     );
   }

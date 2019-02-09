@@ -59,3 +59,20 @@
         }
     }
 }
+
+.sortable {
+    display: flex;
+    width: calc(100% - 1px);
+    text-align: center;
+    border-bottom: 1px solid rgb(210, 210, 210);
+    border-left: 1px solid rgb(210, 210, 210);
+    div {
+        width: calc(25% - 1px);
+        border-right: 1px solid rgb(210, 210, 210);
+        background: #eee;
+        &:hover{
+            background: #fff;
+            cursor: pointer;
+        }
+    }
+}

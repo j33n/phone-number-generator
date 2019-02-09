@@ -1,8 +1,18 @@
+.view-container {
+    margin-top: 50px;
+
+    .numbers-text {
+        width: 100%;
+        text-align: center;
+    }
+}
+
 .error {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+
     span {
         font-size: 30px;
         vertical-align: middle;

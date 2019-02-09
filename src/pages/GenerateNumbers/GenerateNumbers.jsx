@@ -21,7 +21,7 @@ class GenerateNumbers extends PureComponent {
 
   componentDidUpdate = (prevProps, prevState) => {
     if (this.dimensionRef.current && this.dimensionRef.current.clientHeight
-      && prevState.height !== this.viewRef.current.clientHeight) {
+      && prevState.height !== this.dimensionRef.current.clientHeight) {
       this.setState({
         height: this.dimensionRef.current && this.dimensionRef.current.clientHeight
       });
