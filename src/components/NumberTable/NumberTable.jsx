@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import { formZeroedNumber } from '../../pages/GenerateNumbers/GenerateNumbers';
+import Loader from '../Loader/Loader';
+
 import './NumberTable.scss';
 
 const sortBy = {
@@ -23,10 +26,7 @@ class NumberTable extends PureComponent {
   state = {
     numbers: [],
     sort: '',
-  }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    console.log('this.state.numbers', prevState.numbers === this.state.numbers);
+    showLoader: true,
   }
 
   componentDidMount = () => {
@@ -51,25 +51,49 @@ class NumberTable extends PureComponent {
     }
   }
 
+  handleOnSort = (sort) => {
+    this.setState({
+      sort,
+      showLoader: true,
+    });
+    setTimeout(() => {
+      this.setState({ showLoader: false });
+    }, 1000);
+  }
+
   render() {
     const { sortable, } = this.props;
-    const { numbers, sort } = this.state;
+    const { numbers, sort, showLoader, } = this.state;
     const {
-      DESC, ASC, MIN, MAX
+      DESC, ASC, MIN, MAX,
     } = sortBy;
-    const toTabulize = sort ? (sort === ASC ? numbers.sort() : (sort === DESC ? numbers.sort().reverse() : numbers)) : numbers;
+    const toTabulize = () => {
+      if (sort === ASC) {
+        return numbers.sort();
+      } if (sort === DESC) {
+        return numbers.sort().reverse();
+      } if (sort === MAX) {
+        const maxNumber = Math.max(...numbers);
+        return [formZeroedNumber(maxNumber, 10 - maxNumber.length)];
+      } if (sort === MIN) {
+        const minNumber = formZeroedNumber(Math.min(...numbers));
+        return [formZeroedNumber(minNumber, 10 - minNumber.length)];
+      }
+      return numbers;
+    };
     return (
       <div className="number-display">
+        {showLoader && <Loader />}
         <div className="number-display--header">
           <h2>Here are all the numbers generated</h2>
         </div>
         {sortable
           && (
             <div className="sortable">
-              <div role="presentation" onClick={() => this.setState({ sort: DESC })}>Desc</div>
-              <div role="presentation" onClick={() => this.setState({ sort: ASC })}>Asc</div>
-              <div role="presentation" onClick={() => this.setState({ sort: MIN })}>Min</div>
-              <div role="presentation" onClick={() => this.setState({ sort: MAX })}>Max</div>
+              <div role="presentation" onClick={() => this.handleOnSort(DESC)}>Desc</div>
+              <div role="presentation" onClick={() => this.handleOnSort(ASC)}>Asc</div>
+              <div role="presentation" onClick={() => this.handleOnSort(MIN)}>Min</div>
+              <div role="presentation" onClick={() => this.handleOnSort(MAX)}>Max</div>
             </div>
           )
         }
@@ -81,7 +105,7 @@ class NumberTable extends PureComponent {
             Phone Number
           </div>
         </div>
-        {toTabulize.map((number, index) => (
+        {!showLoader && toTabulize().map((number, index) => (
           <div className={`number-display--number number-display--number__${index % 2}`} key={number}>
             <div className="index-column">
               {index}

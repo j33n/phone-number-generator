@@ -5,6 +5,15 @@ import ScrollEnd from '../../components/ScrollEnd/ScrollEnd';
 
 import './generate.scss';
 
+export const formZeroedNumber = (number, numberOfZeroes) => {
+  let zeroes;
+  let combinedZeroes = '';
+  for (zeroes = 1; zeroes <= numberOfZeroes; zeroes += 1) {
+    combinedZeroes = `${combinedZeroes}0`;
+  }
+  return combinedZeroes + number;
+};
+
 class GenerateNumbers extends PureComponent {
   constructor(props) {
     super(props);
@@ -28,19 +37,10 @@ class GenerateNumbers extends PureComponent {
     }
   }
 
-  formZeroedNumber = (number, numberOfZeroes) => {
-    let zeroes;
-    let combinedZeroes = '';
-    for (zeroes = 1; zeroes <= numberOfZeroes; zeroes += 1) {
-      combinedZeroes = `${combinedZeroes}0`;
-    }
-    return combinedZeroes + number;
-  }
-
   stringifyNumber = (number, length) => {
     const strNumber = number.toString(10);
     if (strNumber.length < length) {
-      return this.formZeroedNumber(number, length - strNumber.length);
+      return formZeroedNumber(number, length - strNumber.length);
     }
     return number.toString(10);
   }
