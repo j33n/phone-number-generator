@@ -1,3 +1,62 @@
-.container {
-	width: 200px;
+.loader-container {
+	position: absolute;
+	top: 30%;
+	width: 70%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+
+	span {
+		display: block;
+		border-radius: 50%;
+		margin: 0;
+		padding: 0;
+		margin: 0 5px;
+		animation-iteration-count: infinite;
+	}
+
+	.a {
+		height: 8px;
+		width: 8px;
+		background: #5aa5a5;
+		animation-duration: 1s;
+		animation-name: adjust;
+	}
+
+	.b {
+		height: 12px;
+		width: 12px;
+		background: #328e8e;
+		animation-duration: 1s;
+		animation-name: adjust;
+	}
+
+	.c {
+		height: 16px;
+		width: 16px;
+		background: #0a7676;
+		animation-duration: 1s;
+		animation-name: adjust;
+	}
+
+	@keyframes adjust {
+		0% {
+			background: transparent;
+		}
+
+		100% {
+			background: auto;
+		}
+	}
+}
+
+.overlay {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(36, 124, 123, 0.18);
+	z-index: 10;
 }

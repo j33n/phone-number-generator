@@ -21,6 +21,7 @@ class GenerateNumbers extends PureComponent {
     this.state = {
       numbersGenerated: 0,
       height: null,
+      allNumbers: [],
     };
   }
 
@@ -55,7 +56,13 @@ class GenerateNumbers extends PureComponent {
     });
     if (generatedNumber.length === 10000) {
       // Save numbers generated to localStorage
-      localStorage.setItem('numbers', generatedNumber);
+      const storage = localStorage.getItem('numbers');
+      if (!storage) {
+        localStorage.setItem('numbers', generatedNumber);
+      } else {
+        const storedNumbers = storage && storage.split(',');
+        localStorage.setItem('numbers', generatedNumber.concat(storedNumbers));
+      }
       this.setState({
         numbersGenerated: generatedNumber.length,
         allNumbers: generatedNumber,

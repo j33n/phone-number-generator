@@ -26,7 +26,7 @@ class NumberTable extends PureComponent {
   state = {
     numbers: [],
     sort: '',
-    showLoader: true,
+    showLoader: false,
   }
 
   componentDidMount = () => {

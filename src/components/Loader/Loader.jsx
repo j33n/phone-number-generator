@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+
+import './Loader.scss';
 
 const Loader = () => (
-  <div className="container">
-    <span className="a" />
-    <span className="b" />
-    <span className="c" />
-  </div>
+  <Fragment>
+    <div className="loader-container">
+      <span className="a" />
+      <span className="b" />
+      <span className="c" />
+    </div>
+    <div className="overlay" />
+  </Fragment>
 );
 
 export default Loader;
