@@ -25,11 +25,14 @@ class ViewNumbers extends Component {
   }
 
   componentDidMount = () => {
-    const storedNumbers = localStorage.getItem('numbers').split(',');
-    this.setState({
-      height: this.viewRef.current && this.viewRef.current.clientHeight,
-      storedNumbers,
-    });
+    const storage = localStorage.getItem('numbers');
+    const storedNumbers = storage && storage.split(',');
+    if (storage) {
+      this.setState({
+        height: this.viewRef.current && this.viewRef.current.clientHeight,
+        storedNumbers,
+      });
+    }
   }
 
   render() {

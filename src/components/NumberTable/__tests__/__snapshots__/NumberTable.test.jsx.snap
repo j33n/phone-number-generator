@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumberTable renders 1`] = `
+<NumberTable
+  numbers={
+    Array [
+      "1",
+      "2",
+      "3",
+    ]
+  }
+  sortable={true}
+/>
+`;
