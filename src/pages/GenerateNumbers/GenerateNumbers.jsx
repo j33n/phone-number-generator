@@ -65,9 +65,11 @@ class GenerateNumbers extends PureComponent {
     randomNumbers.forEach((randomNumber) => {
       generatedNumber.push(this.stringifyNumber(randomNumber, 10));
     });
+    console.log('generatedNumber :', generatedNumber);
     if (generatedNumber.length === length) {
       // Save numbers generated to localStorage
       const storage = localStorage.getItem('numbers');
+      console.log('storage :', storage);
       if (!storage) {
         localStorage.setItem('numbers', generatedNumber);
       } else {
