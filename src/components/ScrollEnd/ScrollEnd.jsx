@@ -23,7 +23,7 @@ class ScrollEnd extends PureComponent {
     }
 
     componentDidMount() {
-      window.addEventListener('scroll', this.handleScroll(), { passive: true });
+      window.addEventListener('scroll', this.handleScroll, { passive: true });
     }
 
     componentDidUpdate = (prevProps, prevState) => {
@@ -44,7 +44,7 @@ class ScrollEnd extends PureComponent {
     }
 
     componentWillUnmount() {
-      window.removeEventListener('scroll', this.handleScroll());
+      window.removeEventListener('scroll', this.handleScroll);
     }
 
 
