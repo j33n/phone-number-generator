@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenerateNumbers renders without crashing 1`] = `
+<GenerateNumbers
+  windowCrypto={null}
+/>
+`;

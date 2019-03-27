@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import NumberTable from '../../components/NumberTable/NumberTable';
 import ScrollEnd from '../../components/ScrollEnd/ScrollEnd';
@@ -15,6 +16,14 @@ export const formZeroedNumber = (number, numberOfZeroes) => {
 };
 
 class GenerateNumbers extends PureComponent {
+  static propTypes = {
+    windowCrypto: PropTypes.arrayOf(PropTypes.number),
+  }
+
+  static defaultProps = {
+    windowCrypto: null,
+  }
+
   constructor(props) {
     super(props);
     this.dimensionRef = React.createRef();
@@ -46,22 +55,34 @@ class GenerateNumbers extends PureComponent {
     return number.toString(10);
   }
 
-  triggerGenerator = () => {
-    const arrayLength = new Uint32Array(10000);
-    const randomNumbers = window.crypto.getRandomValues(arrayLength);
+  triggerGenerator = (length = 10000) => {
+    const { windowCrypto } = this.props;
+    const arrayLength = new Uint32Array(length);
+    const randomNumbers = windowCrypto
+    || (window.crypto && window.crypto.getRandomValues(arrayLength));
 
     const generatedNumber = [];
     randomNumbers.forEach((randomNumber) => {
       generatedNumber.push(this.stringifyNumber(randomNumber, 10));
     });
-    if (generatedNumber.length === 10000) {
+    if (generatedNumber.length === length) {
       // Save numbers generated to localStorage
       const storage = localStorage.getItem('numbers');
       if (!storage) {
         localStorage.setItem('numbers', generatedNumber);
       } else {
         const storedNumbers = storage && storage.split(',');
-        localStorage.setItem('numbers', generatedNumber.concat(storedNumbers));
+        try {
+          localStorage.setItem('numbers', generatedNumber.concat(storedNumbers));
+        } catch (e) {
+          // eslint-disable-next-line no-alert
+          const clearStorage = window.confirm('Local Storage is full, Please empty data');
+          if (clearStorage) {
+            localStorage.clear();
+          }
+          // fires When localstorage gets full
+          // you can handle error here or empty the local storage
+        }
       }
       this.setState({
         numbersGenerated: generatedNumber.length,
@@ -75,7 +96,7 @@ class GenerateNumbers extends PureComponent {
     return (
       <div className="container" ref={this.dimensionRef}>
         <ScrollEnd size={32} height={height} />
-        <div className="generator-button" onClick={this.triggerGenerator} type="button" role="presentation">Generate Random Phone Numbers</div>
+        <div className="generator-button" onClick={() => this.triggerGenerator(10000)} type="button" role="presentation">Generate Random Phone Numbers</div>
         {!!numbersGenerated && (
           <div className="alert-container">
             <span className="alert alert--success">

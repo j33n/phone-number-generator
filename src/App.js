@@ -31,7 +31,7 @@ class App extends Component {
           <span>
             Handcrafted by
             {' '}
-            <a href="https://github.com/j33nn"> Jean Abayo</a>
+            <a href="https://github.com/j33n"> Jean Abayo</a>
           </span>
         </div>
       </div>

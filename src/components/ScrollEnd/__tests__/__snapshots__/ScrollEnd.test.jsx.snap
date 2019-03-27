@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumberTable renders 1`] = `
+<ScrollEnd
+  height={12}
+  size={12}
+/>
+`;
