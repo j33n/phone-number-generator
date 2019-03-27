@@ -6,3 +6,4 @@ You can use the app [here](https://tender-leakey-307c7d.netlify.com)
 
 Here is a Demo too
 
+![Demo](src/assets/demo-nbr-gen.gif)
