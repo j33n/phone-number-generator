@@ -50,7 +50,6 @@ class ViewNumbers extends Component {
     }
     return (
       <div className="view-container" ref={this.viewRef}>
-        {console.log('storedNumbers :', storedNumbers)}
         <div className="numbers-text">{`We have generated ${storedNumbers.length} numbers in total`}</div>
         <ScrollEnd size={32} height={height} />
         <NumberTable numbers={storedNumbers} sortable />

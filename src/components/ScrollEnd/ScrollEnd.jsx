@@ -23,7 +23,7 @@ class ScrollEnd extends PureComponent {
     }
 
     componentDidMount() {
-      window.addEventListener('scroll', this.handleScroll, { passive: true });
+      window.addEventListener('scroll', this.handleScroll);
     }
 
     componentDidUpdate = (prevProps, prevState) => {
@@ -64,13 +64,13 @@ class ScrollEnd extends PureComponent {
     handleScroll = () => {
       const { scrollY } = window;
       if (scrollY === 0) {
-        this.setState({
+        return this.setState({
           scrollY: 0,
           topBottomScroll: false,
           bottomTopScroll: false,
         });
       }
-      this.setState({ scrollY });
+      return this.setState({ scrollY });
     }
 
     render() {

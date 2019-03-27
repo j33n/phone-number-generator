@@ -24,13 +24,14 @@ describe('NumberTable', () => {
     window.addEventListener = jest.fn();
     window.scrollY = 100;
     const subject = shallow(component);
-    expect(window.addEventListener).toHaveBeenCalled();
+    subject.instance().handleScroll();
     expect(subject.state('scrollY')).toEqual(100);
   });
 
   it('should identify vertical scroll', () => {
     window.scrollY = 100;
     const subject = shallow(component);
+    subject.instance().handleScroll();
     expect(subject.state('scrollY')).toEqual(100);
     expect(subject.state('topBottomScroll')).toBeTruthy();
     expect(subject.state('bottomTopScroll')).toBeFalsy();
@@ -39,6 +40,7 @@ describe('NumberTable', () => {
   it('should identify horizontal scroll', () => {
     window.scrollY = -100;
     const subject = shallow(component);
+    subject.instance().handleScroll();
     expect(subject.state('scrollY')).toEqual(-100);
     expect(subject.state('topBottomScroll')).toBeFalsy();
     expect(subject.state('bottomTopScroll')).toBeTruthy();
@@ -48,6 +50,7 @@ describe('NumberTable', () => {
     window.scrollY = 100;
     window.scrollTo = jest.fn();
     const subject = shallow(component);
+    subject.setState({ bottomTopScroll: true });
     subject.find('.scroll').simulate('click');
     expect(window.scrollTo).toBeCalledWith(expect.any(Number), expect.any(Number));
   });
@@ -56,6 +59,7 @@ describe('NumberTable', () => {
     window.scrollY = -100;
     window.scrollTo = jest.fn();
     const subject = shallow(component);
+    subject.setState({ bottomTopScroll: true });
     subject.find('.scroll').simulate('click');
     expect(window.scrollTo).toBeCalledWith(expect.any(Number), expect.any(Number));
   });
